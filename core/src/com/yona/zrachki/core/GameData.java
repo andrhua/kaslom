@@ -1,6 +1,7 @@
 package com.yona.zrachki.core;
 
 
+import com.yona.zrachki.assets.Assets;
 import com.yona.zrachki.audio.SFX;
 
 public class GameData {

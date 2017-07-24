@@ -1,6 +1,7 @@
 package com.yona.zrachki.screens;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
@@ -70,6 +71,7 @@ public class SplashScreen extends BaseScreen {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            Gdx.app.log("internal", Gdx.files.internal("fonts/bodoni.ttf").exists()+"");
             colorAction.setEndColor(data.assets.uiSkin.getColor("background"));
             logo.addAction(sequence(
                     fadeOut(.75f),

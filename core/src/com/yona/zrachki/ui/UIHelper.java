@@ -3,6 +3,7 @@ package com.yona.zrachki.ui;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.GameData;
 
 public class UIHelper {
@@ -19,7 +20,7 @@ public class UIHelper {
     }
 
     public static TextButton initTextButton(String text){
-        TextButton button=new TextButton(data.i18n.getBundle().get(text), data.assets.textButtonStyle);
+        TextButton button=new TextButton(data.i18n.getBundle().get(text), Styles.textButtonStyle);
         button.addListener(new TouchListener(button));
         return button;
     }

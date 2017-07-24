@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.yona.zrachki.MyGame;
+import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.GameData;
 import com.yona.zrachki.ui.MyCheckBox;
 
@@ -67,7 +68,7 @@ class SettingsScreen extends BaseScreen{
             }
         });
 
-        titleLabel=new Label(data.i18n.getBundle().get("settings"), data.assets.recordLabelStyle);
+        titleLabel=new Label(data.i18n.getBundle().get("settings"), Styles.regularLabelStyle);
         table.setWidth(.7f*width);
         table.add(titleLabel).row();
         table.add(soundBox.getTable()).left().expandY().row();

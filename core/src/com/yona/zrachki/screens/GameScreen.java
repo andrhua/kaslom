@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.yona.zrachki.MyGame;
+import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.Constants;
 import com.yona.zrachki.core.GameData;
 import com.yona.zrachki.ui.Roulette;
@@ -121,10 +122,10 @@ public class GameScreen extends BaseScreen {
 
     private void createPregameStage(){
         helpLabel=new Label(data.i18n.getBundle().get("help_".concat(
-                mode==Mode.TIME_TRIAL?"time_trial":mode==Mode.RUSH?"rush":"endless")), data.assets.recordLabelStyle);
+                mode==Mode.TIME_TRIAL?"time_trial":mode==Mode.RUSH?"rush":"endless")), Styles.regularLabelStyle);
         helpLabel.setWrap(true);
         helpLabel.setAlignment(Align.center);
-        startLabel=new Label(data.i18n.getBundle().get("tap_to_start"), data.assets.recordLabelStyle);
+        startLabel=new Label(data.i18n.getBundle().get("tap_to_start"), Styles.regularLabelStyle);
 
         pregameTable=new Table();
         pregameTable.defaults().align(Align.center);
@@ -143,8 +144,8 @@ public class GameScreen extends BaseScreen {
 
         scoreLabel=new Label(data.i18n.getBundle().get(
                 mode==Mode.TIME_TRIAL?"score":mode==Mode.RUSH?"left":"solved").concat(":"),
-                data.assets.recordLabelStyle);
-        timerLabel=new Label(data.i18n.getBundle().get("time").concat(":"), data.assets.recordLabelStyle);
+                Styles.regularLabelStyle);
+        timerLabel=new Label(data.i18n.getBundle().get("time").concat(":"), Styles.regularLabelStyle);
         roulette=new Roulette(numOfFormulas, data, stage);
 
         yesButton=initImageButton("yes");
@@ -202,7 +203,7 @@ public class GameScreen extends BaseScreen {
 
         modeLabel=new Label(data.i18n.getBundle().get(
                 mode==Mode.TIME_TRIAL?"time_trial":mode==Mode.RUSH?"rush":"endless").concat(" mode"),
-                data.assets.recordLabelStyle);
+                Styles.regularLabelStyle);
 
         pauseTable=new Table();
         pauseTable.setFillParent(true);
@@ -213,7 +214,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void createFinishStage(){
-        finishLabel=new Label(data.i18n.getBundle().get("finish_text"), data.assets.recordLabelStyle);
+        finishLabel=new Label(data.i18n.getBundle().get("finish_text"), Styles.regularLabelStyle);
         nextButton=initImageButton("next");
         nextButton.addListener(new ChangeListener() {
             @Override
@@ -231,7 +232,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void createStatsStage(){
-        statsLabel=new Label("Statssssss", data.assets.recordLabelStyle);
+        statsLabel=new Label("Statssssss", Styles.regularLabelStyle);
         exitButton2 =initImageButton("cancel");
         exitButton2.addListener(new ChangeListener() {
             @Override

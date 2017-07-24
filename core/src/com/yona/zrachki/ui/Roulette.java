@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Array;
+import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.Constants;
 import com.yona.zrachki.core.GameData;
 import com.yona.zrachki.game.Formula;
@@ -53,7 +54,7 @@ public class Roulette {
         WidgetGroup wg=null;
         switch (formula.getOperation()){
             case ADD: case SUBSTRACT: case MULTIPLY: case DIVIDE:
-                Label l=new Label(formula.toString(), data.assets.logLabelStyle);
+                Label l=new Label(formula.toString(), Styles.formulaLabelStyle);
                 Container<Label> c=new Container<Label>();
                 c.setTransform(true);
                 c.setBounds(l.getX(), l.getY(), l.getWidth(), l.getHeight());

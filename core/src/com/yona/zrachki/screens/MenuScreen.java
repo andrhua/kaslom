@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.yona.zrachki.MyGame;
+import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.GameData;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -85,15 +86,12 @@ class MenuScreen extends BaseScreen {
 
     @Override
     public void createStage() {
-        data.assets.textButtonStyle = new TextButton.TextButtonStyle();
-        data.assets.textButtonStyle.font=data.assets.main20;
-        data.assets.textButtonStyle.fontColor= Color.BLACK;
         createRomaStage();
         createModeStage();
     }
 
     private void createRomaStage(){
-        romaLabel =new Label("r o m a", data.assets.titleLabelStyle);
+        romaLabel =new Label("r o m a", Styles.titleLabelStyle);
         romaLabel.setAlignment(Align.center);
 
         TextButton settingsButton = initTextButton("settings");
@@ -137,7 +135,7 @@ class MenuScreen extends BaseScreen {
     }
 
     private void createModeStage(){
-        modeLabel=new Label(data.i18n.getBundle().get("mode"), data.assets.titleLabelStyle);
+        modeLabel=new Label(data.i18n.getBundle().get("mode"), Styles.titleLabelStyle);
         modeLabel.setAlignment(Align.center);
 
         TextButton timeTrialButton=initTextButton("time_trial");

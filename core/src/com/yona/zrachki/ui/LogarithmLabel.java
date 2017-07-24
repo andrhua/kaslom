@@ -3,6 +3,7 @@ package com.yona.zrachki.ui;
 import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
+import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.GameData;
 import com.yona.zrachki.game.Formula;
 
@@ -14,9 +15,9 @@ public class LogarithmLabel {
     }
 
     public LogarithmLabel(Formula formula, GameData data) {
-        Label logLabel = new Label("log", data.assets.logLabelStyle);
-        Label baseLabel = new Label(String.valueOf(formula.getA()), data.assets.scriptLabelStyle);
-        Label sublogLabel = new Label(String.valueOf(formula.getB()).concat(" = ").concat(String.valueOf(formula.getAnswer())), data.assets.logLabelStyle);
+        Label logLabel = new Label("log", Styles.formulaLabelStyle);
+        Label baseLabel = new Label(String.valueOf(formula.getA()), Styles.scriptLabelStyle);
+        Label sublogLabel = new Label(String.valueOf(formula.getB()).concat(" = ").concat(String.valueOf(formula.getAnswer())), Styles.formulaLabelStyle);
         group=new HorizontalGroup();
         group.addActor(logLabel);
         group.rowAlign(Align.bottom).addActor(baseLabel);
