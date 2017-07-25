@@ -2,6 +2,7 @@ package com.yona.zrachki.screens;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
@@ -9,9 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.yona.zrachki.MyGame;
+import com.yona.zrachki.assets.Assets;
 import com.yona.zrachki.assets.Styles;
-import com.yona.zrachki.core.GameData;
+import com.yona.zrachki.audio.SFX;
+
+import com.yona.zrachki.core.I18n;
+import com.yona.zrachki.core.Settings;
 import com.yona.zrachki.ui.MyCheckBox;
+import com.yona.zrachki.ui.UIHelper;
 
 import static com.yona.zrachki.ui.UIHelper.initCheckBox;
 import static com.yona.zrachki.ui.UIHelper.initImageButton;
@@ -23,40 +29,42 @@ class SettingsScreen extends BaseScreen{
     private Label titleLabel;
     private ImageButton backButton;
 
-    SettingsScreen(MyGame screenManager, GameData data) {
-        super(screenManager, data);
+    SettingsScreen(MyGame screenManager) {
+        super(screenManager);
     }
 
     @Override
     public void createStage() {
-        soundBox=initCheckBox(data.i18n.getBundle().get("sound"));
+        soundBox=initCheckBox(I18n.getString("sound"));
         soundBox.getLabelCell().padRight(40);
-        soundBox.setChecked(data.profile.sfxEnabled);
-        soundBox.getImageCell().getActor().addListener(new ActorGestureListener(){
+        soundBox.setChecked(Settings.isSfxEnabled());
+        soundBox.getTable().addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
-                data.SFX.setEnabled(soundBox.isChecked());
+                SFX.play(SFX.SoundType.CLICK_POSITIVE);
+                Settings.toggleSfxEnabled();
             }
         });
-        vibroBox=initCheckBox(data.i18n.getBundle().get("vibration"));
+        vibroBox=initCheckBox(I18n.getString("vibration"));
         vibroBox.getLabelCell().padRight(40);
-        vibroBox.setChecked(data.profile.vibrationEnabled);
-        vibroBox.getImageCell().getActor().addListener(new ActorGestureListener(){
+        vibroBox.setChecked(Settings.isVibrationEnabled());
+        vibroBox.getTable().addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
-                data.profile.vibrationEnabled=vibroBox.isChecked();
+                SFX.play(SFX.SoundType.CLICK_POSITIVE);
+                Settings.toggleVibrationEnabled();
             }
         });
 
-        languageBox=new SelectBox(data.assets.uiSkin);
-        languageBox.setItems(data.i18n.getBundle().get("en"), data.i18n.getBundle().get("ru"));
-        languageBox.setSelectedIndex(data.profile.language.equals("ru")?1:0);
+        languageBox= UIHelper.initSelectBox();
+        languageBox.setItems(I18n.getString("en"), I18n.getString("ru"));
+        languageBox.setSelectedIndex(Settings.getLanguage()== I18n.Language.EN?0:1);
         languageBox.getList().addListener(new ActorGestureListener(){
             @Override
             public void tap(InputEvent event, float x, float y, int count, int button) {
                 int lang=languageBox.getSelectedIndex();
-                if (!data.i18n.setLanguage(lang==0?"en":"ru"))
-                    setScreen(new MenuScreen(screenManager, data));
+                if (!I18n.setLanguage(lang==0? I18n.Language.EN: I18n.Language.RU))
+                    setScreen(new MenuScreen(screenManager));
             }
         });
 
@@ -64,11 +72,11 @@ class SettingsScreen extends BaseScreen{
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                setScreen(new MenuScreen(screenManager, data));
+                setScreen(new MenuScreen(screenManager));
             }
         });
 
-        titleLabel=new Label(data.i18n.getBundle().get("settings"), Styles.regularLabelStyle);
+        titleLabel=new Label(I18n.getString("settings"), Styles.regularLabelStyle);
         table.setWidth(.7f*width);
         table.add(titleLabel).row();
         table.add(soundBox.getTable()).left().expandY().row();

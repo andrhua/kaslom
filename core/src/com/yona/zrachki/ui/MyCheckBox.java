@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ActorGestureListener;
 import com.badlogic.gdx.utils.Align;
+import com.yona.zrachki.assets.Assets;
+import com.yona.zrachki.assets.Fonts;
 
 public class MyCheckBox {
     private Table table;
@@ -19,7 +21,7 @@ public class MyCheckBox {
     public MyCheckBox(String text, Skin skin){
         isChecked=false;
         cbs= skin.get("default", CheckBox.CheckBoxStyle.class);
-        Label label=new Label(text, new Label.LabelStyle(cbs.font, cbs.fontColor));
+        Label label=new Label(text, new Label.LabelStyle(Fonts.mainRegular, Assets.uiSkin.getColor("black")));
         image=new Image(cbs.checkboxOff);
         image.addListener(new ActorGestureListener(){
             @Override

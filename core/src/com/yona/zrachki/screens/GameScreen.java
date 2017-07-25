@@ -14,7 +14,9 @@ import com.badlogic.gdx.utils.Align;
 import com.yona.zrachki.MyGame;
 import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.Constants;
-import com.yona.zrachki.core.GameData;
+
+import com.yona.zrachki.core.I18n;
+import com.yona.zrachki.core.Progress;
 import com.yona.zrachki.ui.Roulette;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
@@ -38,8 +40,8 @@ public class GameScreen extends BaseScreen {
     private int score, left, solved, numOfFormulas;
     private float time;
 
-    GameScreen(MyGame screenManager, GameData data, Mode mode) {
-        super(screenManager, data);
+    GameScreen(MyGame screenManager, Mode mode) {
+        super(screenManager);
         setMode(mode);
         setState(State.PREGAME);
     }
@@ -53,7 +55,7 @@ public class GameScreen extends BaseScreen {
                 numOfFormulas=50;
             } break;
             case RUSH:{
-                left=data.profile.progress.rushFormulas;
+                left= Progress.getRushFormulas();
                 numOfFormulas=left;
                 time=0;
             } break;
@@ -121,11 +123,11 @@ public class GameScreen extends BaseScreen {
     }
 
     private void createPregameStage(){
-        helpLabel=new Label(data.i18n.getBundle().get("help_".concat(
+        helpLabel=new Label(I18n.getString("help_".concat(
                 mode==Mode.TIME_TRIAL?"time_trial":mode==Mode.RUSH?"rush":"endless")), Styles.regularLabelStyle);
         helpLabel.setWrap(true);
         helpLabel.setAlignment(Align.center);
-        startLabel=new Label(data.i18n.getBundle().get("tap_to_start"), Styles.regularLabelStyle);
+        startLabel=new Label(I18n.getString("tap_to_start"), Styles.regularLabelStyle);
 
         pregameTable=new Table();
         pregameTable.defaults().align(Align.center);
@@ -142,11 +144,11 @@ public class GameScreen extends BaseScreen {
             }
         });
 
-        scoreLabel=new Label(data.i18n.getBundle().get(
+        scoreLabel=new Label(I18n.getString(
                 mode==Mode.TIME_TRIAL?"score":mode==Mode.RUSH?"left":"solved").concat(":"),
                 Styles.regularLabelStyle);
-        timerLabel=new Label(data.i18n.getBundle().get("time").concat(":"), Styles.regularLabelStyle);
-        roulette=new Roulette(numOfFormulas, data, stage);
+        timerLabel=new Label(I18n.getString("time").concat(":"), Styles.regularLabelStyle);
+        roulette=new Roulette(numOfFormulas, stage);
 
         yesButton=initImageButton("yes");
         yesButton.addListener(new ChangeListener() {
@@ -183,7 +185,7 @@ public class GameScreen extends BaseScreen {
             public void changed(ChangeEvent event, Actor actor) {
                 gameTable.setVisible(false);
                 finishTable.setVisible(false);
-                setScreen(new MenuScreen(screenManager, data));
+                setScreen(new MenuScreen(screenManager));
             }
         });
         restartButton1 =initTextButton("restart");
@@ -201,7 +203,7 @@ public class GameScreen extends BaseScreen {
             }
         });
 
-        modeLabel=new Label(data.i18n.getBundle().get(
+        modeLabel=new Label(I18n.getString(
                 mode==Mode.TIME_TRIAL?"time_trial":mode==Mode.RUSH?"rush":"endless").concat(" mode"),
                 Styles.regularLabelStyle);
 
@@ -214,7 +216,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void createFinishStage(){
-        finishLabel=new Label(data.i18n.getBundle().get("finish_text"), Styles.regularLabelStyle);
+        finishLabel=new Label(I18n.getString("finish_text"), Styles.regularLabelStyle);
         nextButton=initImageButton("next");
         nextButton.addListener(new ChangeListener() {
             @Override
@@ -240,7 +242,7 @@ public class GameScreen extends BaseScreen {
                 gameTable.setVisible(false);
                 finishTable.setVisible(false);
                 pauseTable.setVisible(false);
-                setScreen(new MenuScreen(screenManager, data));
+                setScreen(new MenuScreen(screenManager));
             }
         });
         restartButton2 =initTextButton("restart");

@@ -10,13 +10,15 @@ public class Styles {
     public static Label.LabelStyle titleLabelStyle, regularLabelStyle, formulaLabelStyle, scriptLabelStyle;
 
     public Styles(Skin skin){
+        Color blackColor=skin.getColor("black");
         textButtonStyle = new TextButton.TextButtonStyle();
         textButtonStyle.font= Fonts.mainRegular;
-        textButtonStyle.fontColor= skin.getColor("black");
+        textButtonStyle.fontColor= blackColor;
 
-        titleLabelStyle=new Label.LabelStyle( Fonts.logo, Color.BLACK);
-        regularLabelStyle =new Label.LabelStyle( Fonts.mainRegular, Color.BLACK);
-        formulaLabelStyle =new Label.LabelStyle( Fonts.mainFormula, Color.BLACK);
-        scriptLabelStyle=new Label.LabelStyle( Fonts.mainScript, Color.BLACK);
+        titleLabelStyle=new Label.LabelStyle( Fonts.logo, blackColor);
+        regularLabelStyle =new Label.LabelStyle( Fonts.mainRegular, blackColor);
+        formulaLabelStyle =new Label.LabelStyle( Fonts.mainFormula, blackColor);
+        scriptLabelStyle=new Label.LabelStyle( Fonts.mainScript, blackColor);
+
     }
 }

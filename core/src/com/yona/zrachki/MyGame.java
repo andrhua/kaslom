@@ -7,14 +7,16 @@ import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.yona.zrachki.core.Constants;
-import com.yona.zrachki.core.GameData;
+import com.yona.zrachki.core.Progress;
+import com.yona.zrachki.core.Settings;
 import com.yona.zrachki.screens.BaseScreen;
 import com.yona.zrachki.screens.SplashScreen;
 
 public class MyGame extends Game {
-    public GameData gameData;
     private Camera camera;
     private FitViewport viewport;
+    public static Settings settings;
+    public static Progress progress;
 
     @Override
     public void create() {
@@ -25,7 +27,7 @@ public class MyGame extends Game {
         viewport.apply();
         camera.translate(viewport.getWorldWidth() / 2, viewport.getWorldHeight() / 2, 0);
         camera.update();
-        setScreen(new SplashScreen(this, gameData));
+        setScreen(new SplashScreen(this));
     }
 
     @Override
@@ -52,7 +54,8 @@ public class MyGame extends Game {
 
     @Override
     public void pause() {
-        gameData.profile.save();
+        settings.write();
+        progress.write();
         super.pause();
     }
 

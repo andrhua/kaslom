@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.yona.zrachki.MyGame;
 import com.yona.zrachki.core.Constants;
-import com.yona.zrachki.core.GameData;
 import com.yona.zrachki.gfx.GlWrap;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.alpha;
@@ -23,14 +22,12 @@ public abstract class BaseScreen extends ScreenAdapter implements Stagable, Rend
     SpriteBatch spriteBatch;
     ShapeRenderer shapeRenderer;
     MyGame screenManager;
-    GameData data;
     int width, height;
     Stage stage;
     Table table;
     Color backgroundColor;
 
-    BaseScreen(MyGame screenManager, GameData data){
-        this.data=data;
+    BaseScreen(MyGame screenManager){
         this.screenManager = screenManager;
     }
 

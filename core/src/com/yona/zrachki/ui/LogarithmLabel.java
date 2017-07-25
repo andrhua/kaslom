@@ -4,7 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.HorizontalGroup;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Align;
 import com.yona.zrachki.assets.Styles;
-import com.yona.zrachki.core.GameData;
+
 import com.yona.zrachki.game.Formula;
 
 public class LogarithmLabel {
@@ -14,7 +14,7 @@ public class LogarithmLabel {
         return group;
     }
 
-    public LogarithmLabel(Formula formula, GameData data) {
+    public LogarithmLabel(Formula formula) {
         Label logLabel = new Label("log", Styles.formulaLabelStyle);
         Label baseLabel = new Label(String.valueOf(formula.getA()), Styles.scriptLabelStyle);
         Label sublogLabel = new Label(String.valueOf(formula.getB()).concat(" = ").concat(String.valueOf(formula.getAnswer())), Styles.formulaLabelStyle);

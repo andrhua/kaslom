@@ -12,7 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.yona.zrachki.MyGame;
 import com.yona.zrachki.assets.Styles;
-import com.yona.zrachki.core.GameData;
+import com.yona.zrachki.core.I18n;
+
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.run;
@@ -32,8 +33,8 @@ class MenuScreen extends BaseScreen {
     public enum State {ROMA, MODE}
     private State state;
 
-    MenuScreen(MyGame screenManager, GameData data) {
-        super(screenManager, data);
+    MenuScreen(MyGame screenManager) {
+        super(screenManager);
     }
 
     public void setState(State state) {
@@ -98,7 +99,7 @@ class MenuScreen extends BaseScreen {
         settingsButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                setScreen(new SettingsScreen(screenManager, data));
+                setScreen(new SettingsScreen(screenManager));
             }
         });
         settingsButton.pad(10);
@@ -135,14 +136,14 @@ class MenuScreen extends BaseScreen {
     }
 
     private void createModeStage(){
-        modeLabel=new Label(data.i18n.getBundle().get("mode"), Styles.titleLabelStyle);
+        modeLabel=new Label(I18n.getString("mode"), Styles.titleLabelStyle);
         modeLabel.setAlignment(Align.center);
 
         TextButton timeTrialButton=initTextButton("time_trial");
         timeTrialButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                setScreen(new GameScreen(screenManager, data, GameScreen.Mode.TIME_TRIAL));
+                setScreen(new GameScreen(screenManager, GameScreen.Mode.TIME_TRIAL));
             }
         });
         timeTrialButton.pad(10);
@@ -151,7 +152,7 @@ class MenuScreen extends BaseScreen {
         rushButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                setScreen(new GameScreen(screenManager, data, GameScreen.Mode.RUSH));
+                setScreen(new GameScreen(screenManager, GameScreen.Mode.RUSH));
             }
         });
         rushButton.pad(10);
@@ -160,7 +161,7 @@ class MenuScreen extends BaseScreen {
         endlessButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                setScreen(new GameScreen(screenManager, data, GameScreen.Mode.ENDLESS));
+                setScreen(new GameScreen(screenManager, GameScreen.Mode.ENDLESS));
             }
         });
         endlessButton.pad(10);

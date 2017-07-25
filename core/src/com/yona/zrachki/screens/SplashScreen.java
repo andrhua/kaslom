@@ -12,7 +12,12 @@ import com.badlogic.gdx.utils.async.AsyncExecutor;
 import com.badlogic.gdx.utils.async.AsyncResult;
 import com.badlogic.gdx.utils.async.AsyncTask;
 import com.yona.zrachki.MyGame;
-import com.yona.zrachki.core.GameData;
+import com.yona.zrachki.assets.Assets;
+import com.yona.zrachki.audio.SFX;
+
+import com.yona.zrachki.core.I18n;
+import com.yona.zrachki.core.Progress;
+import com.yona.zrachki.core.Settings;
 import com.yona.zrachki.ui.UIHelper;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.fadeOut;
@@ -21,20 +26,20 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 public class SplashScreen extends BaseScreen {
     private AsyncResult result;
-    private AsyncTask<GameData> task;
+    private AsyncTask task;
     private Image logo;
     private boolean res, updateColor;
     private ColorAction colorAction;
 
-    public SplashScreen(MyGame screenManager, GameData data) {
-        super(screenManager, data);
+    public SplashScreen(MyGame screenManager) {
+        super(screenManager);
         res=false;
         updateColor=false;
     }
 
     @Override
     public void createStage() {
-        backgroundColor=new Color(Color.WHITE);
+        backgroundColor=new Color(Color.LIME);
         colorAction=new ColorAction();
         colorAction.setColor(backgroundColor);
         colorAction.setDuration(1);
@@ -44,10 +49,15 @@ public class SplashScreen extends BaseScreen {
         table.defaults().width(200).height(200);
         table.add(logo).align(Align.center);
 
-        task=new AsyncTask<GameData>() {
+        task=new AsyncTask() {
             @Override
-            public GameData call() throws Exception {
-                return new GameData();
+            public Object call() throws Exception {
+                new Assets();
+                MyGame.settings=new Settings();
+                MyGame.progress=new Progress();
+                new SFX();
+                new I18n();
+                return null;
             }
         };
         AsyncExecutor executor=new AsyncExecutor(1);
@@ -65,14 +75,11 @@ public class SplashScreen extends BaseScreen {
     public void render() {
         if (result.isDone()&&!res) {
             try {
-                data=task.call();
-                new UIHelper(data);
-                screenManager.gameData=data;
+                task.call();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Gdx.app.log("internal", Gdx.files.internal("fonts/bodoni.ttf").exists()+"");
-            colorAction.setEndColor(data.assets.uiSkin.getColor("background"));
+            colorAction.setEndColor(Assets.uiSkin.getColor("background"));
             logo.addAction(sequence(
                     fadeOut(.75f),
                     run(new Runnable() {
@@ -82,7 +89,7 @@ public class SplashScreen extends BaseScreen {
                             Timer.schedule(new Timer.Task() {
                                 @Override
                                 public void run() {
-                                    setScreen(new MenuScreen(screenManager, data));
+                                    setScreen(new MenuScreen(screenManager));
                                 }
                             }, 1);
 

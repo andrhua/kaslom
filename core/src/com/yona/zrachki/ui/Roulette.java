@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.WidgetGroup;
 import com.badlogic.gdx.utils.Array;
 import com.yona.zrachki.assets.Styles;
 import com.yona.zrachki.core.Constants;
-import com.yona.zrachki.core.GameData;
+
 import com.yona.zrachki.game.Formula;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
@@ -26,12 +26,10 @@ public class Roulette {
     private Array<Formula>formulas;
     private Array<WidgetGroup> labels;
     private int activeIndex, numOfFormulas;
-    private GameData data;
     private float CELL_HEIGHT;
     private Action inAnimation, outAnimation;
 
-    public Roulette(int numOffFormulas, GameData data, Stage stage){
-        this.data=data;
+    public Roulette(int numOffFormulas, Stage stage){
         this.numOfFormulas=numOffFormulas;
         this.stage=stage;
         group=new VerticalGroup();
@@ -62,8 +60,8 @@ public class Roulette {
                 c.setOrigin(l.getWidth()/2, l.getHeight()/2);
                 wg=c;
                 break;
-            case EXP: wg=new ExponentiationLabel(formula, data).getGroup(); break;
-            case LOG: wg=new com.yona.zrachki.ui.LogarithmLabel(formula, data).getGroup(); break;
+            case EXP: wg=new ExponentiationLabel(formula).getGroup(); break;
+            case LOG: wg=new com.yona.zrachki.ui.LogarithmLabel(formula).getGroup(); break;
         }
         return wg;
     }

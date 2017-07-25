@@ -25,7 +25,7 @@ public class Constants {
         START_SCREEN_ANIMATION=.5f;
 
         TEXT_REGULAR=96;
-        TEXT_SCRIPT=65;
-        TEXT_FORMULA=90;
+        TEXT_SCRIPT=60;
+        TEXT_FORMULA=95;
     }
 }

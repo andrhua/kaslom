@@ -1,13 +1,21 @@
 {
 com.badlogic.gdx.graphics.g2d.BitmapFont: {
-	bodoni: {
-		file: bodoni.fnt
+	bodoni-regular: {
+		file: bodoni-regular.fnt
 	}
 }
 com.badlogic.gdx.graphics.Color: {
-    background: {hex:#ffffff}
+	background: {
+		r: 1
+		g: 1
+		b: 1
+		a: 1
+	}
 	black: {
-		hex: #212121
+		r: 0.09019608
+		g: 0.09019608
+		b: 0.09019608
+		a: 1
 	}
 	grey: {
 		r: 0.4633333
@@ -20,29 +28,31 @@ com.badlogic.gdx.scenes.scene2d.ui.CheckBox$CheckBoxStyle: {
 	default: {
 		checkboxOn: checkbox_on
 		checkboxOff: checkbox_off
-		font: bodoni
+		font: bodoni-regular
 		fontColor: black
 	}
 }
-com.badlogic.gdx.scenes.scene2d.ui.List$ListStyle: {
-	default: {
-		font: bodoni
-		fontColorSelected: black
-		fontColorUnselected: grey
-		selection: selected
+com.badlogic.gdx.scenes.scene2d.ui.ImageButton$ImageButtonStyle: {
+	cancel: {
+		imageUp: cancel
 	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.ScrollPane$ScrollPaneStyle: {
-	default: {
-		background: background
+	back: {
+		imageUp: back
 	}
-}
-com.badlogic.gdx.scenes.scene2d.ui.SelectBox$SelectBoxStyle: {
-	default: {
-		font: bodoni
-		fontColor: black
-		scrollStyle: default
-		listStyle: default
+	restart: {
+		imageUp: restart
+	}
+	yes: {
+		imageUp: yes
+	}
+	no: {
+		imageUp: no
+	}
+	pause: {
+		imageUp: pause
+	}
+	next: {
+		imageUp: next
 	}
 }
 }
